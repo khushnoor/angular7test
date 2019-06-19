@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+.highlightColor{
+
+background:yellow;
+}
+td /* Give whatever class name you want */
+{
+width:11em; /* Give whatever width you want */
+word-wrap:break-word;
+}
+
+
+  

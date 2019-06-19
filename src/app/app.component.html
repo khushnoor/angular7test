@@ -1,0 +1,95 @@
+<div class="input-group md-form form-sm form-1 pl-0" class="container">
+  <input type="text" [(ngModel)]="searchText"  class="search form-control" placeholder="What you looking for?">
+</div>
+<br>
+<strong class="container"  *ngIf="(searchText && searchText.length >0 && ((myRecords | filter : searchText)?.length >0 ))  "> Showing &nbsp;&nbsp;{{(myRecords | filter : searchText)?.length }}&nbsp;&nbsp; of &nbsp;&nbsp;{{myRecords.length}}</strong>
+<strong class="container"  *ngIf="searchText && searchText.length >0 && ((myRecords | filter : searchText)?.length ==0 ) "> No Data Found</strong>
+
+  <div  class="table-responsive  " *ngIf="!(searchText && searchText.length >0 && ((myRecords | filter : searchText)?.length ==0 ) )">          
+    <table class="table container "  >
+      <thead  class="thead-dark">
+        <tr class="row">
+          <th class="col-sm-4">TITLE</th>
+          <th class="col-sm-4">URL</th>
+          <th class="col-sm-3">CREATED AT</th>
+          <th class="col-sm-1">AUTHOR </th>
+     
+        </tr>
+      </thead>
+      <tbody *ngFor="let X of myRecords | filter : searchText "  (click)="open(content,X)">
+        <tr class="row">
+          <td class="col-sm-4" >{{X.title }}</td>
+          <td class="col-sm-4">{{X.url}}</td>
+          <td class="col-sm-3">{{X.created_at   | date:'fullDate'  }}</td>
+          <td class="col-sm-1" >{{X.author}}</td>
+        
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    
+<router-outlet></router-outlet>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    
+    <div  class="table-responsive  ">          
+      <table class="table container "  >
+        <th><h4 class="modal-title" id="modal-basic-title">Details </h4></th>
+        <tr>
+          <td><strong>Author</strong></td>
+          <td>{{detail.author}}</td>
+        </tr>
+        <tr>
+            <td><strong>Comment text</strong></td>
+            <td>{{detail.comment_text}}</td>
+          </tr>
+          <tr>
+              <td><strong>Created at</strong></td>
+              <td>{{detail.created_at  | date:'fullDate' }}</td>
+            </tr>
+            <tr>
+                <td><strong>No of Comments</strong></td>
+                <td>{{detail.num_comments}}</td>
+              </tr>
+              <tr>
+                  <td><strong>Object ID</strong></td>
+                  <td>{{detail.objectID}}</td>
+                </tr>
+                <tr>
+                    <td><strong>Parent Id</strong></td>
+                    <td>{{detail.parent_id}}</td>
+                  </tr>
+                  <tr>
+                      <td><strong>Points</strong></td>
+                      <td>{{detail.points}}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Relevancy Score</strong></td>
+                        <td>{{detail.relevancy_score}}</td>
+                      </tr>
+                      <tr>
+                          <td><strong>title</strong></td>
+                          <td>{{detail.title}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>url</strong></td>
+                            <td>{{detail.story_url}}</td>
+                          </tr>
+                          <tr>
+                              <td><strong>Story Id</strong></td>
+                              <td>{{detail.story_id}}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Story Title</strong></td>
+                                <td>{{detail.story_title}}</td>
+                              </tr>
+                            
+                                
+                                  
+      </table>
+      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">OK</button>
+      </div>
+    
+   
+  </div>
+</ng-template>
